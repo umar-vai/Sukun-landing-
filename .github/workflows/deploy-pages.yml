@@ -24,6 +24,26 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Prepare enhanced static site
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import os
+
+          path = Path('index.html')
+          html = path.read_text(encoding='utf-8')
+          sha = os.environ.get('GITHUB_SHA', 'latest')[:12]
+          css = f'<link rel="stylesheet" href="enhance.css?v={sha}">'
+          js = f'<script src="enhance.js?v={sha}"></script>'
+
+          if 'enhance.css' not in html:
+              html = html.replace('</head>', f'  {css}\n</head>')
+          if 'enhance.js' not in html:
+              html = html.replace('</body>', f'  {js}\n</body>')
+
+          path.write_text(html, encoding='utf-8')
+          PY
+
       - name: Configure Pages
         uses: actions/configure-pages@v6
 
