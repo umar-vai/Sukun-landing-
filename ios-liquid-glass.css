@@ -1,32 +1,31 @@
-/* Near-clear liquid glass override
-   Goal: keep ~90% of the content behind the navbar visually readable while
-   retaining an iOS-like transparent/specular glass edge. */
+/* Crystal-clear liquid glass override
+   Goal: keep the content behind the navbar and dropdown ~90% readable,
+   while preserving a thin iOS-like specular glass edge. */
 
 header .nav{
-  background:rgba(238,250,255,.025) !important;
-  border:1px solid rgba(255,255,255,.28) !important;
-  -webkit-backdrop-filter:blur(4px) saturate(145%) brightness(1.025) contrast(1.015) !important;
-  backdrop-filter:blur(4px) saturate(145%) brightness(1.025) contrast(1.015) !important;
+  background:rgba(244,252,255,.012) !important;
+  border:1px solid rgba(255,255,255,.24) !important;
+  -webkit-backdrop-filter:blur(1.25px) saturate(122%) brightness(1.008) contrast(1.006) !important;
+  backdrop-filter:blur(1.25px) saturate(122%) brightness(1.008) contrast(1.006) !important;
   box-shadow:
-    0 10px 28px rgba(4,42,68,.065),
-    inset 0 1px 0 rgba(255,255,255,.48),
-    inset 1px 0 0 rgba(255,255,255,.10),
-    inset -1px 0 0 rgba(255,255,255,.05),
-    inset 0 -1px 0 rgba(7,62,92,.055) !important;
+    0 8px 22px rgba(4,42,68,.045),
+    inset 0 1px 0 rgba(255,255,255,.42),
+    inset 1px 0 0 rgba(255,255,255,.07),
+    inset -1px 0 0 rgba(255,255,255,.035),
+    inset 0 -1px 0 rgba(7,62,92,.045) !important;
 }
 
-/* Thin specular top edge only — no milky sweep over the content. */
+/* Thin specular edge only — no broad milky highlight. */
 header .nav::before{
   inset:0 !important;
   transform:none !important;
   animation:none !important;
   border-radius:inherit !important;
-  background:linear-gradient(180deg,rgba(255,255,255,.24) 0%,rgba(255,255,255,.035) 16%,transparent 31%) !important;
-  opacity:.48 !important;
+  background:linear-gradient(180deg,rgba(255,255,255,.18) 0%,rgba(255,255,255,.018) 11%,transparent 22%) !important;
+  opacity:.34 !important;
   pointer-events:none !important;
 }
 
-/* Remove the broad optical haze layer so letters behind remain recognizable. */
 header .nav::after{
   inset:1px !important;
   left:1px !important;
@@ -37,70 +36,109 @@ header .nav::after{
   height:auto !important;
   border-radius:calc(24px - 1px) !important;
   filter:none !important;
-  background:linear-gradient(115deg,rgba(255,255,255,.045),transparent 28%,transparent 72%,rgba(15,155,215,.018)) !important;
-  opacity:.55 !important;
+  background:linear-gradient(115deg,rgba(255,255,255,.014),transparent 24%,transparent 80%,rgba(15,155,215,.008)) !important;
+  opacity:.28 !important;
   pointer-events:none !important;
 }
 
 body.nav-scrolled header .nav{
-  background:rgba(236,249,255,.030) !important;
-  border-color:rgba(255,255,255,.30) !important;
-  -webkit-backdrop-filter:blur(4px) saturate(148%) brightness(1.025) contrast(1.015) !important;
-  backdrop-filter:blur(4px) saturate(148%) brightness(1.025) contrast(1.015) !important;
+  background:rgba(242,251,255,.014) !important;
+  border-color:rgba(255,255,255,.25) !important;
+  -webkit-backdrop-filter:blur(1.25px) saturate(124%) brightness(1.008) contrast(1.006) !important;
+  backdrop-filter:blur(1.25px) saturate(124%) brightness(1.008) contrast(1.006) !important;
   box-shadow:
-    0 11px 30px rgba(3,39,63,.07),
-    inset 0 1px 0 rgba(255,255,255,.50),
-    inset 0 -1px 0 rgba(4,58,89,.06) !important;
+    0 9px 24px rgba(3,39,63,.05),
+    inset 0 1px 0 rgba(255,255,255,.44),
+    inset 0 -1px 0 rgba(4,58,89,.045) !important;
 }
 
 @media (max-width:680px){
-  header .nav{
-    background:rgba(240,251,255,.016) !important;
-    border-color:rgba(255,255,255,.24) !important;
-    -webkit-backdrop-filter:blur(2px) saturate(132%) brightness(1.015) contrast(1.01) !important;
-    backdrop-filter:blur(2px) saturate(132%) brightness(1.015) contrast(1.01) !important;
+  header .nav,
+  body.nav-scrolled header .nav{
+    background:rgba(247,253,255,.008) !important;
+    border-color:rgba(255,255,255,.22) !important;
+    -webkit-backdrop-filter:blur(.7px) saturate(116%) brightness(1.004) contrast(1.004) !important;
+    backdrop-filter:blur(.7px) saturate(116%) brightness(1.004) contrast(1.004) !important;
     box-shadow:
-      0 8px 22px rgba(4,39,62,.055),
-      inset 0 1px 0 rgba(255,255,255,.42),
-      inset 1px 0 0 rgba(255,255,255,.08),
-      inset 0 -1px 0 rgba(4,58,89,.05) !important;
+      0 7px 18px rgba(4,39,62,.045),
+      inset 0 1px 0 rgba(255,255,255,.38),
+      inset 1px 0 0 rgba(255,255,255,.06),
+      inset 0 -1px 0 rgba(4,58,89,.04) !important;
   }
 
   header .nav::before{
-    background:linear-gradient(180deg,rgba(255,255,255,.20) 0%,rgba(255,255,255,.025) 14%,transparent 28%) !important;
-    opacity:.42 !important;
+    background:linear-gradient(180deg,rgba(255,255,255,.15) 0%,rgba(255,255,255,.012) 10%,transparent 20%) !important;
+    opacity:.30 !important;
   }
 
   header .nav::after{
     border-radius:19px !important;
-    background:linear-gradient(115deg,rgba(255,255,255,.025),transparent 26%,transparent 76%,rgba(15,155,215,.012)) !important;
-    opacity:.40 !important;
-  }
-
-  body.nav-scrolled header .nav{
-    background:rgba(238,250,255,.020) !important;
-    border-color:rgba(255,255,255,.26) !important;
-    -webkit-backdrop-filter:blur(2px) saturate(134%) brightness(1.015) contrast(1.01) !important;
-    backdrop-filter:blur(2px) saturate(134%) brightness(1.015) contrast(1.01) !important;
+    background:linear-gradient(115deg,rgba(255,255,255,.010),transparent 22%,transparent 82%,rgba(15,155,215,.006)) !important;
+    opacity:.22 !important;
   }
 
   .mobile-menu-toggle{
-    background:rgba(255,255,255,.10) !important;
-    border-color:rgba(255,255,255,.28) !important;
-    -webkit-backdrop-filter:blur(2px) saturate(128%) !important;
-    backdrop-filter:blur(2px) saturate(128%) !important;
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.38),0 3px 10px rgba(7,52,79,.05) !important;
+    background:rgba(255,255,255,.055) !important;
+    border-color:rgba(255,255,255,.24) !important;
+    -webkit-backdrop-filter:blur(.7px) saturate(116%) !important;
+    backdrop-filter:blur(.7px) saturate(116%) !important;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.34),0 3px 9px rgba(7,52,79,.04) !important;
+  }
+
+  /* Apply the same crystal-clear glass treatment to the mobile dropdown. */
+  .mobile-menu-panel{
+    background:rgba(240,250,255,.025) !important;
+    border:1px solid rgba(255,255,255,.25) !important;
+    -webkit-backdrop-filter:blur(1.2px) saturate(120%) brightness(1.006) contrast(1.004) !important;
+    backdrop-filter:blur(1.2px) saturate(120%) brightness(1.006) contrast(1.004) !important;
+    box-shadow:
+      0 12px 32px rgba(5,42,67,.055),
+      inset 0 1px 0 rgba(255,255,255,.40),
+      inset 0 -1px 0 rgba(5,55,84,.045) !important;
+    overflow:hidden !important;
+  }
+
+  .mobile-menu-panel::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    border-radius:inherit;
+    pointer-events:none;
+    background:linear-gradient(180deg,rgba(255,255,255,.14),rgba(255,255,255,.012) 12%,transparent 24%) !important;
+    opacity:.34;
+  }
+
+  .mobile-menu-panel a{
+    position:relative;
+    z-index:1;
+    background:transparent !important;
+    color:var(--navy) !important;
+    text-shadow:0 1px 0 rgba(255,255,255,.18);
+  }
+
+  .mobile-menu-panel a + a{
+    border-top:1px solid rgba(13,43,69,.055) !important;
+  }
+
+  .mobile-menu-panel a:active{
+    background:rgba(255,255,255,.035) !important;
   }
 }
 
-/* Safari / WKWebView: make it even clearer because WebKit blur is visually stronger. */
+/* WebKit/iOS: keep it almost optically clear. */
 @supports (-webkit-touch-callout:none){
   @media (max-width:680px){
     header .nav,
     body.nav-scrolled header .nav{
-      background:rgba(244,252,255,.012) !important;
-      -webkit-backdrop-filter:blur(1px) saturate(130%) brightness(1.012) contrast(1.01) !important;
-      backdrop-filter:blur(1px) saturate(130%) brightness(1.012) contrast(1.01) !important;
+      background:rgba(249,254,255,.006) !important;
+      -webkit-backdrop-filter:blur(.45px) saturate(114%) brightness(1.003) contrast(1.003) !important;
+      backdrop-filter:blur(.45px) saturate(114%) brightness(1.003) contrast(1.003) !important;
+    }
+
+    .mobile-menu-panel{
+      background:rgba(246,253,255,.018) !important;
+      -webkit-backdrop-filter:blur(.8px) saturate(116%) brightness(1.004) contrast(1.003) !important;
+      backdrop-filter:blur(.8px) saturate(116%) brightness(1.004) contrast(1.003) !important;
     }
   }
 }
