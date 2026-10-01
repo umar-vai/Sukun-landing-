@@ -36,6 +36,7 @@ jobs:
           css = f'<link rel="stylesheet" href="enhance.css?v={sha}">'
           glass = f'<link rel="stylesheet" href="glass-tune.css?v={sha}">'
           mobile_css = f'<link rel="stylesheet" href="mobile-pro.css?v={sha}">'
+          ios_glass = f'<link rel="stylesheet" href="ios-liquid-glass.css?v={sha}">'
           js = f'<script src="enhance.js?v={sha}"></script>'
           mobile_js = f'<script src="mobile-pro.js?v={sha}"></script>'
 
@@ -45,6 +46,8 @@ jobs:
               html = html.replace('</head>', f'  {glass}\n</head>')
           if 'mobile-pro.css' not in html:
               html = html.replace('</head>', f'  {mobile_css}\n</head>')
+          if 'ios-liquid-glass.css' not in html:
+              html = html.replace('</head>', f'  {ios_glass}\n</head>')
           if 'enhance.js' not in html:
               html = html.replace('</body>', f'  {js}\n</body>')
           if 'mobile-pro.js' not in html:
