@@ -1,0 +1,228 @@
+@import url('https://fonts.maateen.me/solaiman-lipi/font.css');
+
+:root{
+  --glass-bg:rgba(255,255,255,.55);
+  --glass-border:rgba(255,255,255,.78);
+  --glass-shadow:0 18px 60px rgba(10,112,168,.14), inset 0 1px 0 rgba(255,255,255,.85);
+  --ease-spring:cubic-bezier(.2,.85,.25,1.25);
+  --ease-smooth:cubic-bezier(.2,.7,.2,1);
+}
+
+html{scroll-padding-top:110px}
+body{
+  font-family:'SolaimanLipi','Hind Siliguri',system-ui,-apple-system,sans-serif !important;
+  overflow-x:hidden;
+}
+
+/* --- top reading progress --- */
+.scroll-progress-track{
+  position:fixed;inset:0 0 auto 0;height:4px;z-index:9999;
+  background:rgba(13,43,69,.07);pointer-events:none;
+}
+.scroll-progress-bar{
+  position:relative;height:100%;width:0;
+  background:linear-gradient(90deg,var(--deep),var(--sukun),#7dd9f5,var(--sukun));
+  background-size:240% 100%;
+  box-shadow:0 0 16px rgba(15,155,215,.5);
+  animation:progressGlow 3s linear infinite;
+  will-change:width;
+}
+.scroll-progress-bar::after{
+  content:'';position:absolute;right:-5px;top:50%;width:9px;height:9px;border-radius:50%;
+  transform:translateY(-50%);background:#fff;
+  box-shadow:0 0 0 3px rgba(15,155,215,.25),0 0 16px var(--sukun);
+}
+@keyframes progressGlow{to{background-position:240% 0}}
+
+/* --- liquid glass navbar --- */
+header{
+  position:sticky !important;top:0 !important;z-index:100 !important;
+  background:transparent !important;border:0 !important;
+  backdrop-filter:none !important;padding:10px 0 0;
+  pointer-events:none;
+}
+header .nav{
+  pointer-events:auto;position:relative;height:72px !important;padding:0 18px;
+  border:1px solid var(--glass-border);border-radius:24px;
+  background:
+    linear-gradient(135deg,rgba(255,255,255,.76),rgba(255,255,255,.35)),
+    radial-gradient(circle at 20% 0%,rgba(255,255,255,.8),transparent 35%);
+  -webkit-backdrop-filter:blur(26px) saturate(185%);
+  backdrop-filter:blur(26px) saturate(185%);
+  box-shadow:var(--glass-shadow);
+  transition:transform .35s var(--ease-smooth),box-shadow .35s ease,background .35s ease,border-color .35s ease;
+  overflow:hidden;
+}
+header .nav::before{
+  content:'';position:absolute;inset:-1px;border-radius:inherit;pointer-events:none;
+  background:linear-gradient(110deg,transparent 12%,rgba(255,255,255,.7) 31%,transparent 48%);
+  transform:translateX(-115%);animation:glassSweep 8s ease-in-out infinite;
+}
+header .nav::after{
+  content:'';position:absolute;width:140px;height:140px;left:18%;top:-110px;border-radius:50%;
+  background:rgba(15,155,215,.12);filter:blur(12px);pointer-events:none;
+}
+body.nav-scrolled header .nav{
+  transform:translateY(3px) scale(.985);
+  background:linear-gradient(135deg,rgba(255,255,255,.84),rgba(232,245,252,.53));
+  border-color:rgba(255,255,255,.9);
+  box-shadow:0 20px 62px rgba(13,43,69,.2),inset 0 1px 0 #fff;
+}
+@keyframes glassSweep{0%,55%{transform:translateX(-125%)}75%,100%{transform:translateX(125%)}}
+
+.nav-links a{position:relative;transition:color .25s ease,transform .25s ease}
+.nav-links a::after{
+  content:'';position:absolute;left:50%;bottom:-8px;width:0;height:2px;border-radius:99px;
+  background:linear-gradient(90deg,var(--deep),var(--sukun));
+  transform:translateX(-50%);transition:width .28s var(--ease-smooth);
+}
+.nav-links a:hover{transform:translateY(-2px)}
+.nav-links a:hover::after{width:100%}
+.brand img{transition:transform .45s var(--ease-spring),filter .3s ease}
+.brand:hover img{transform:translateY(-2px) scale(1.04);filter:drop-shadow(0 8px 14px rgba(15,155,215,.16))}
+
+/* --- typography polish --- */
+h1,h2,h3,summary,label,.btn,.eyebrow,.nav-links{font-family:'SolaimanLipi','Hind Siliguri',sans-serif !important}
+h1,h2{letter-spacing:0 !important}
+.hero-copy h1 span{
+  display:inline-block;color:transparent !important;
+  background:linear-gradient(100deg,var(--deep),var(--sukun),#6ed6f3,var(--deep));
+  background-size:250% auto;-webkit-background-clip:text;background-clip:text;
+  animation:titleShimmer 5s linear infinite;
+}
+@keyframes titleShimmer{to{background-position:250% center}}
+
+/* --- premium buttons --- */
+.btn{position:relative;overflow:hidden;isolation:isolate;transition:transform .28s var(--ease-spring),box-shadow .28s ease,filter .28s ease !important}
+.btn::before{
+  content:'';position:absolute;inset:-40% auto -40% -35%;width:28%;transform:rotate(18deg);
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.62),transparent);
+  transition:left .65s ease;z-index:-1;
+}
+.btn:hover::before{left:115%}
+.btn:hover{transform:translateY(-3px) scale(1.015) !important}
+.btn-primary:hover{box-shadow:0 18px 34px rgba(15,155,215,.35) !important}
+
+/* --- ambient hero motion --- */
+.hero{isolation:isolate;background-size:140% 140% !important;animation:heroBreath 10s ease-in-out infinite alternate}
+.hero::before{animation:orbOne 11s ease-in-out infinite alternate}
+.hero::after{animation:orbTwo 13s ease-in-out infinite alternate}
+@keyframes heroBreath{to{background-position:8% 12%}}
+@keyframes orbOne{to{transform:translate(-34px,30px) scale(1.08) rotate(8deg)}}
+@keyframes orbTwo{to{transform:translate(28px,-22px) scale(.94) rotate(-8deg)}}
+
+.hero-glow{
+  position:absolute;z-index:0;width:430px;height:430px;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(15,155,215,.16),rgba(15,155,215,.05) 38%,transparent 70%);
+  transform:translate(-50%,-50%);filter:blur(4px);opacity:.75;
+  transition:opacity .25s ease;will-change:left,top;
+}
+
+.hero-card{transform-style:preserve-3d;will-change:transform;transition:transform .15s ease-out,box-shadow .35s ease !important}
+.hero-card:hover{box-shadow:0 38px 95px rgba(13,43,69,.32) !important}
+.hero-card .kicker,.hero-card .days,.hero-card .days-label,.hero-card .hero-list,.hero-card .start-anytime{transform:translateZ(18px)}
+.days{animation:softFloat 5.5s ease-in-out infinite}
+@keyframes softFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+
+/* floating particles */
+.motion-particle{
+  position:absolute;z-index:0;border-radius:50%;pointer-events:none;opacity:.28;
+  background:linear-gradient(135deg,var(--sukun),#bceeff);
+  animation:particleFloat var(--dur,9s) ease-in-out infinite alternate;
+}
+@keyframes particleFloat{to{transform:translate3d(var(--dx,30px),var(--dy,-50px),0) scale(1.3);opacity:.1}}
+
+/* --- richer entrance animations --- */
+.reveal{
+  opacity:0;transform:translateY(28px) scale(.985);
+  filter:blur(4px);
+  transition:opacity .8s var(--ease-smooth),transform .8s var(--ease-smooth),filter .8s ease !important;
+  transition-delay:var(--reveal-delay,0ms) !important;
+}
+.reveal.show{opacity:1;transform:none;filter:none}
+
+.stats{transform:translateZ(0)}
+.stat{position:relative;overflow:hidden;transition:background .25s ease,transform .28s var(--ease-spring)}
+.stat::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0,rgba(15,155,215,.09),transparent 62%);opacity:0;transition:opacity .3s ease}
+.stat:hover{transform:translateY(-4px);background:#fbfeff}.stat:hover::before{opacity:1}
+.stat strong{position:relative;z-index:1}
+
+/* spotlight cards */
+.phase,.include,.soft-card,.price-card,.form-shell,details{
+  --mx:50%;--my:50%;position:relative;
+}
+.phase::after,.include::after,.soft-card::after{
+  content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;
+  background:radial-gradient(220px circle at var(--mx) var(--my),rgba(15,155,215,.11),transparent 68%);
+  transition:opacity .3s ease;
+}
+.phase:hover::after,.include:hover::after,.soft-card:hover::after{opacity:1}
+.phase,.include{transition:transform .32s var(--ease-spring),box-shadow .32s ease,border-color .32s ease !important}
+.phase:hover,.include:hover{transform:translateY(-8px) scale(1.012) !important}
+
+.include .icon,.phase .num{transition:transform .4s var(--ease-spring),box-shadow .35s ease}
+.include:hover .icon{transform:rotate(-7deg) scale(1.12);box-shadow:0 9px 20px rgba(15,155,215,.13)}
+.phase:hover .num{transform:rotate(6deg) scale(1.08)}
+
+.old-patient{overflow:hidden}
+.old-patient::before{
+  content:'';position:absolute;inset:-80% -20%;pointer-events:none;
+  background:linear-gradient(110deg,transparent 42%,rgba(255,255,255,.055) 50%,transparent 58%);
+  animation:panelShine 7s linear infinite;
+}
+@keyframes panelShine{to{transform:translateX(45%)}}
+
+.price-card{animation:pricePulse 6s ease-in-out infinite}
+@keyframes pricePulse{0%,100%{box-shadow:0 30px 70px rgba(13,43,69,.22)}50%{box-shadow:0 36px 88px rgba(15,155,215,.22)}}
+.consult-value{animation:badgePulse 2.6s ease-in-out infinite}
+@keyframes badgePulse{50%{transform:scale(1.025);background:rgba(242,196,90,.2)}}
+
+/* faq interaction */
+details{transition:transform .28s ease,border-color .28s ease,box-shadow .28s ease,background .28s ease}
+details:hover{transform:translateX(4px);border-color:#b9e3f4;box-shadow:0 12px 28px rgba(13,43,69,.06)}
+details[open]{background:linear-gradient(180deg,#fff,#f8fdff);border-color:#bce6f6;box-shadow:0 18px 38px rgba(13,43,69,.08)}
+details[open] summary:after{transform:translateY(-50%) rotate(180deg)}
+summary:after{transition:transform .35s var(--ease-spring)}
+
+/* animated form focus */
+input,select{transition:border-color .2s ease,box-shadow .25s ease,transform .25s ease !important}
+input:focus,select:focus{transform:translateY(-2px)}
+
+/* scroll-to-section active nav */
+.nav-links a.is-active{color:var(--sukun)}
+.nav-links a.is-active::after{width:100%}
+
+/* mobile glass bar */
+.mobile-bar{
+  background:linear-gradient(135deg,rgba(13,43,69,.88),rgba(13,64,95,.78)) !important;
+  -webkit-backdrop-filter:blur(24px) saturate(160%) !important;
+  backdrop-filter:blur(24px) saturate(160%) !important;
+  border:1px solid rgba(255,255,255,.2) !important;
+  box-shadow:0 22px 60px rgba(0,0,0,.26),inset 0 1px 0 rgba(255,255,255,.15) !important;
+}
+
+/* compact 40-day progress chip added by JS */
+.challenge-progress{
+  margin-top:18px;padding:15px 16px;border-radius:16px;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);
+  position:relative;z-index:2;
+}
+.challenge-progress-head{display:flex;align-items:center;justify-content:space-between;gap:14px;color:#d9f4ff;font-size:14px;margin-bottom:9px}
+.challenge-progress-head strong{color:#fff}
+.challenge-progress-rail{height:8px;background:rgba(255,255,255,.1);border-radius:999px;overflow:hidden}
+.challenge-progress-fill{width:0;height:100%;border-radius:inherit;background:linear-gradient(90deg,#62d1f2,#fff,#62d1f2);background-size:200% 100%;animation:railGlow 3s linear infinite;transition:width 1.2s var(--ease-smooth)}
+@keyframes railGlow{to{background-position:200% 0}}
+
+@media (max-width:680px){
+  header{padding-top:7px}
+  header .nav{height:62px !important;border-radius:20px;padding:0 12px}
+  .hero{padding-top:56px !important}
+  .scroll-progress-track{height:3px}
+  .hero-glow{width:260px;height:260px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;scroll-behavior:auto !important}
+  .reveal{opacity:1 !important;transform:none !important;filter:none !important}
+  .hero-card{transform:none !important}
+}
