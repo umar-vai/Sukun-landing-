@@ -104,6 +104,9 @@
 
   // Count-up stats when they enter the viewport
   document.querySelectorAll('.stat strong').forEach(el => {
+    // Keep rich stat markup (e.g. struck-through consultancy value + FREE label) intact.
+    // The count-up animation rewrites textContent, so only animate plain-text stats.
+    if (el.children.length > 0 || el.classList.contains('consult-stat-price')) return;
     const raw = el.textContent.trim();
     const numeric = Number(raw.replace(/[^0-9.]/g, ''));
     if (!Number.isFinite(numeric) || numeric <= 0 || reduceMotion) return;
