@@ -116,6 +116,14 @@
     .stat:last-child{border-right:none}
     .stat strong{display:block;font:700 30px/1 Poppins,sans-serif;color:var(--sukun);margin-bottom:8px}
     .stat span{font-size:14px;color:var(--muted);font-weight:600}
+    .consult-stat-price{display:flex!important;align-items:center;justify-content:center;gap:9px;flex-wrap:wrap}
+    .old-consult-price{position:relative;display:inline-block;color:#8296a6!important;font-size:.72em!important;font-weight:700!important;line-height:1}
+    .old-consult-price::after{content:"";position:absolute;left:-4%;right:-4%;top:50%;height:3px;background:#e63946;border-radius:999px;transform:rotate(-7deg);box-shadow:0 1px 0 rgba(230,57,70,.16)}
+    .free-consult-price{color:var(--sukun)!important;font-weight:800!important;font-size:1em!important}
+    .old-inline-price{position:relative;display:inline-block;color:#7a8f9f;font-weight:700}
+    .old-inline-price::after{content:"";position:absolute;left:-3%;right:-3%;top:50%;height:2px;background:#e63946;border-radius:999px;transform:rotate(-6deg)}
+    .consult-value .old-consult-price{color:#ffd0d0!important;margin-right:8px}
+    .consult-value .free-consult-price{color:#fff!important}
 
     .intro-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:70px;align-items:center}
     .soft-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:34px;box-shadow:0 12px 35px rgba(13,43,69,.06)}
@@ -286,7 +294,7 @@
         <div class="stat"><strong>3</strong><span>সম্পূর্ণ ফ্রি বিশেষ ওয়েবিনার</span></div>
         <div class="stat"><strong>3</strong><span>লাইভ প্রশ্নোত্তর</span></div>
         <div class="stat"><strong>1</strong><span>কনসাল্টেন্সি সেশন</span></div>
-        <div class="stat"><strong>৳1500</strong><span>কনসাল্টেন্সির মূল্য</span></div>
+        <div class="stat"><strong class="consult-stat-price"><span class="old-consult-price">৳1500</span><span class="free-consult-price">ফ্রি</span></strong><span>কনসাল্টেন্সি সেশন</span></div>
       </div>
     </div>
 
@@ -360,7 +368,7 @@
           <article class="include reveal"><div class="icon"><svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 1 1-4.8-7.33"/><path d="M21 3v6h-6"/></svg></div><h3>৩টি লাইভ প্রশ্নোত্তর</h3><p class="muted">যেখানে অংশগ্রহণকারীরা নিজেদের প্রশ্ন সরাসরি তুলে ধরতে পারবেন।</p></article>
           <article class="include reveal"><div class="icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4H6.5A2.5 2.5 0 0 0 4 6.5z"/><path d="M4 6.5v13"/></svg></div><h3>প্ল্যানার, ট্র্যাকার ও নোটস</h3><p class="muted">দৈনিক আমল টিক দেওয়া, অগ্রগতি দেখা এবং গুরুত্বপূর্ণ পর্যবেক্ষণ নোট করার জন্য।</p></article>
           <article class="include bonus reveal"><div class="icon"><svg viewBox="0 0 24 24"><path d="M20 12v8H4v-8M2 7h20v5H2zM12 7v13M12 7H7.5a2.5 2.5 0 1 1 0-5C11 2 12 7 12 7zm0 0h4.5a2.5 2.5 0 1 0 0-5C13 2 12 7 12 7z"/></svg></div><h3>সেমিনার গিফটস</h3><p class="muted">SukunLife-এর সেমিনারে যেসব নির্বাচিত গিফট দেওয়া হয়, এই আয়োজনেও সেগুলো অন্তর্ভুক্ত থাকবে।</p></article>
-          <article class="include bonus reveal"><div class="icon"><svg viewBox="0 0 24 24"><path d="M12 22a8 8 0 1 0 0-16 8 8 0 0 0 0 16z"/><path d="M12 2v4M8 2h8M12 10v4l3 2"/></svg></div><h3>১টি কনসাল্টেন্সি</h3><p class="muted">অনলাইন অথবা অফলাইনে ১টি কনসাল্টেন্সি—যার নিয়মিত মূল্য ৳১৫০০।</p></article>
+          <article class="include bonus reveal"><div class="icon"><svg viewBox="0 0 24 24"><path d="M12 22a8 8 0 1 0 0-16 8 8 0 0 0 0 16z"/><path d="M12 2v4M8 2h8M12 10v4l3 2"/></svg></div><h3>১টি ফ্রি কনসাল্টেন্সি</h3><p class="muted">অনলাইন অথবা অফলাইনে ১টি কনসাল্টেন্সি—নিয়মিত মূল্য <span class="old-inline-price">৳১৫০০</span>, এখন সম্পূর্ণ ফ্রি।</p></article>
         </div>
 
         <div class="old-patient reveal">
@@ -384,7 +392,7 @@
           <div class="value-list">
             <div class="value-item"><i class="check">✓</i><span>৩টি সম্পূর্ণ ফ্রি ওয়েবিনার + ৩টি লাইভ Q&amp;A</span></div>
             <div class="value-item"><i class="check">✓</i><span>প্ল্যানার, ট্র্যাকার, নোটস ও সেমিনার গিফটস</span></div>
-            <div class="value-item"><i class="check">✓</i><span>৳১৫০০ মূল্যের ১টি অনলাইন/অফলাইন কনসাল্টেন্সি</span></div>
+            <div class="value-item"><i class="check">✓</i><span>১টি সম্পূর্ণ ফ্রি অনলাইন/অফলাইন কনসাল্টেন্সি <span class="old-inline-price">৳১৫০০</span></span></div>
             <div class="value-item"><i class="check">✓</i><span>পুরাতন পেশেন্টদের জন্য অতিরিক্ত ডিজিটাল বোনাস</span></div>
           </div>
         </div>
@@ -392,7 +400,7 @@
           <div class="price-label">চ্যালেঞ্জ রেজিস্ট্রেশন</div>
           <div class="price">ফ্রি</div>
           <p class="price-note">কোনো রেজিস্ট্রেশন ফি নেই • পুরো ৪০ দিনের আয়োজন সম্পূর্ণ ফ্রি</p>
-          <span class="consult-value">কনসাল্টেন্সির নিয়মিত মূল্যই ৳১৫০০</span>
+          <span class="consult-value">কনসাল্টেন্সি: <span class="old-consult-price">৳১৫০০</span><span class="free-consult-price">ফ্রি</span></span>
           <a class="btn btn-primary btn-wide" href="#register">এখনই আমার সিট নিশ্চিত করুন</a>
           <div class="secure">রেজিস্ট্রেশনের পর SukunLife টিম থেকে পরবর্তী নির্দেশনা দেওয়া হবে। কোনো পেমেন্ট লাগবে না।</div>
         </aside>
