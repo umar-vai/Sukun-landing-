@@ -417,7 +417,7 @@ export default function LandingPage() {
             <div className="field"><label htmlFor="phone">হোয়াটসঅ্যাপ নাম্বার</label><input id="phone" name="phone" required inputMode="tel" placeholder="01XXXXXXXXX" autoComplete="tel" /></div>
             <div className="field"><label htmlFor="email">জিমেইল</label><input id="email" name="email" type="email" required placeholder="example@gmail.com" autoComplete="email" /></div>
             <div className="field">
-              <label htmlFor="gender">আপনি কোন গ্রুপে যোগ দিতে চান?</label>
+              <label htmlFor="gender">লিঙ্গ নির্বাচন করুন</label>
               <select id="gender" name="gender" required defaultValue="">
                 <option value="" disabled>পুরুষ বা মহিলা নির্বাচন করুন</option>
                 <option value="male">পুরুষ</option>
