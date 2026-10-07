@@ -690,6 +690,8 @@ body.nav-scrolled header .nav{
   /* registration */
   .register .section-head{margin-bottom:22px !important}
   .form-shell{padding:10px !important;border-radius:22px !important;gap:12px !important}
+  .form-shell form{order:1}
+  .form-shell .form-info{order:2}
   .form-info{padding:20px !important;border-radius:18px !important}
   .form-info h3{font-size:25px !important}
   form{padding:10px 6px 6px !important}
