@@ -423,9 +423,9 @@
             <div class="contact-row"><small>সময়</small><strong>সকাল ১০টা – রাত ১০টা</strong></div>
           </aside>
           <form id="regForm">
-            <div class="field"><label for="name">পূর্ণ নাম</label><input id="name" name="name" required placeholder="আপনার নাম" autocomplete="name" /></div>
-            <div class="field"><label for="phone">মোবাইল নম্বর</label><input id="phone" name="phone" required inputmode="tel" placeholder="01XXXXXXXXX" autocomplete="tel" /></div>
-            <div class="field"><label for="patient">আপনি কি SukunLife-এর পুরাতন পেশেন্ট?</label><select id="patient" name="patient" required><option value="">নির্বাচন করুন</option><option>হ্যাঁ</option><option>না</option></select></div>
+            <div class="field"><label for="name">নাম</label><input id="name" name="name" required placeholder="আপনার নাম" autocomplete="name" /></div>
+            <div class="field"><label for="phone">হোয়াটসঅ্যাপ নাম্বার</label><input id="phone" name="phone" required inputmode="tel" placeholder="01XXXXXXXXX" autocomplete="tel" /></div>
+            <div class="field"><label for="email">জিমেইল</label><input id="email" name="email" type="email" required placeholder="example@gmail.com" autocomplete="email" /></div>
             <button class="btn btn-primary btn-wide" type="submit">WhatsApp-এ রেজিস্ট্রেশন পাঠান</button>
             <p class="form-note">এই ফর্ম ওয়েবসাইটে কোনো তথ্য সংরক্ষণ করে না; সাবমিট করলে WhatsApp খুলবে।</p>
           </form>
@@ -489,8 +489,8 @@
       e.preventDefault();
       const name = document.getElementById('name').value.trim();
       const phone = document.getElementById('phone').value.trim();
-      const patient = document.getElementById('patient').value;
-      const text = `আসসালামু আলাইকুম, আমি SukunLife-এর ৪০ দিনের জাদু থেকে সুরক্ষা চ্যালেঞ্জে রেজিস্ট্রেশন করতে চাই।\n\nনাম: ${name}\nমোবাইল: ${phone}\nপুরাতন পেশেন্ট: ${patient}\nরেজিস্ট্রেশন: সম্পূর্ণ ফ্রি\n\nফ্রি রেজিস্ট্রেশন ও পরবর্তী নির্দেশনা জানাবেন।`;
+      const email = document.getElementById('email').value.trim();
+      const text = `আসসালামু আলাইকুম, আমি SukunLife-এর ৪০ দিনের জাদু থেকে সুরক্ষা চ্যালেঞ্জে রেজিস্ট্রেশন করতে চাই।\n\nনাম: ${name}\nহোয়াটসঅ্যাপ নাম্বার: ${phone}\nজিমেইল: ${email}\nরেজিস্ট্রেশন: সম্পূর্ণ ফ্রি\n\nফ্রি রেজিস্ট্রেশন ও পরবর্তী নির্দেশনা জানাবেন।`;
       window.open(`https://wa.me/8801887753555?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
     });
   </script>
