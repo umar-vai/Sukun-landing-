@@ -81,6 +81,9 @@
   h3{font-size:21px !important}
   .lead{font-size:17px !important;line-height:1.68 !important}
   .hero-copy .lead{max-width:520px;margin:0 auto}
+  .social-proof{width:100%;justify-content:center;text-align:left;margin:0 0 18px !important;padding:12px 13px !important;border-radius:14px !important}
+  .social-proof .proof-number{font-size:20px !important}
+  .social-proof .proof-text{font-size:14px !important;line-height:1.42}
   .hero-actions{display:grid !important;grid-template-columns:1fr !important;gap:10px !important;margin:22px 0 18px !important}
   .hero-actions .btn{width:100%;min-height:50px;border-radius:15px}
   .micro{display:grid !important;grid-template-columns:1fr 1fr;gap:8px !important;text-align:left;font-size:13px !important}
