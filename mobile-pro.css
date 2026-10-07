@@ -1,4 +1,8 @@
 /* Professional mobile-first refinement layer */
+/* The JS appends the mobile menu to <body>; keep it fully hidden on desktop. */
+.mobile-menu-panel{display:none}
+.mobile-menu-toggle{display:none}
+
 @media (max-width: 680px){
   :root{
     --mobile-pad:18px;
@@ -30,6 +34,7 @@
     white-space:nowrap;
   }
   .mobile-menu-toggle{
+    display:grid;
     width:42px;height:42px;flex:0 0 42px;border:1px solid rgba(255,255,255,.24);
     border-radius:13px;background:rgba(255,255,255,.08);display:grid;place-items:center;
     padding:0;cursor:pointer;color:var(--navy);position:relative;z-index:4;
@@ -48,6 +53,7 @@
   body.mobile-menu-open .mobile-menu-toggle::after{transform:rotate(-45deg)}
 
   .mobile-menu-panel{
+    display:block;
     position:fixed;top:76px;left:14px;right:14px;z-index:95;
     border-radius:22px;padding:12px;
     background:linear-gradient(145deg,rgba(255,255,255,.34),rgba(255,255,255,.10));
