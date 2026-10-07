@@ -85,7 +85,7 @@
     const challenge = document.createElement('div');
     challenge.className = 'challenge-progress';
     challenge.innerHTML = `
-      <div class="challenge-progress-head"><span>৪০ দিনের যাত্রা</span><strong>৪টি ধাপ × ১০ দিন</strong></div>
+      <div class="challenge-progress-head"><span>৫ ধাপে ৪০ দিনের যাত্রা</span><strong>৫টি ধাপ × ৮ দিন</strong></div>
       <div class="challenge-progress-rail"><div class="challenge-progress-fill"></div></div>`;
     if (startBox) startBox.insertAdjacentElement('beforebegin', challenge);
     else heroCard.appendChild(challenge);
