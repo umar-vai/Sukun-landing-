@@ -116,6 +116,8 @@
     .stat:last-child{border-right:none}
     .stat strong{display:block;font:700 30px/1 Poppins,sans-serif;color:var(--sukun);margin-bottom:8px}
     .stat span{font-size:14px;color:var(--muted);font-weight:600}
+    .stat.stat-inline{display:flex;align-items:center;justify-content:center}
+    .stat.stat-inline span{font-size:20px;color:var(--navy);font-weight:800;line-height:1.35;white-space:nowrap}
     .consult-stat-price{display:flex!important;align-items:center;justify-content:center;gap:9px;flex-wrap:wrap}
     .old-consult-price{position:relative;display:inline-block;color:#8296a6!important;font-size:.72em!important;font-weight:700!important;line-height:1}
     .old-consult-price::after{content:"";position:absolute;left:-4%;right:-4%;top:50%;height:3px;background:#e63946;border-radius:999px;transform:rotate(-7deg);box-shadow:0 1px 0 rgba(230,57,70,.16)}
@@ -228,7 +230,7 @@
       .section{padding:68px 0}
       .nav{height:68px}.brand img{height:44px}.price-mini{display:none}.nav-cta .btn{padding:11px 14px}
       .hero{padding:48px 0 58px}.hero-card{padding:28px}.days{font-size:76px}
-      .stats-wrap{margin-top:-18px}.stats{border-radius:18px}.stat{padding:20px 12px}.stat strong{font-size:26px}
+      .stats-wrap{margin-top:-18px}.stats{border-radius:18px}.stat{padding:20px 12px}.stat strong{font-size:26px}.stat.stat-inline span{font-size:17px;white-space:nowrap}
       .road-grid,.include-grid{grid-template-columns:1fr}
       .soft-card{padding:25px}.old-patient{padding:28px}.price-card{padding:28px}.form-shell{padding:14px}.form-info{padding:22px}
       .footer-grid{grid-template-columns:1fr}.footer-contact{text-align:left}
@@ -291,9 +293,9 @@
 
     <div class="container stats-wrap reveal">
       <div class="stats">
-        <div class="stat"><strong>1</strong><span>বিশেষ ওয়েবিনার</span></div>
-        <div class="stat"><strong>✓</strong><span>লাইভ প্রশ্নোত্তর</span></div>
-        <div class="stat"><strong>40</strong><span>দিনের পূর্ণ প্ল্যান</span></div>
+        <div class="stat stat-inline"><span>বিশেষ ওয়েবিনার</span></div>
+        <div class="stat stat-inline"><span>লাইভ প্রশ্নোত্তর</span></div>
+        <div class="stat stat-inline"><span>৪০ দিনের পূর্ণ প্ল্যান</span></div>
         <div class="stat"><strong>✓</strong><span>প্ল্যানার, ট্র্যাকার ও নোটস</span></div>
       </div>
     </div>
