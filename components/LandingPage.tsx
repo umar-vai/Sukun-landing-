@@ -2,6 +2,11 @@
 
 import { FormEvent, useCallback, useEffect, useRef, useState } from 'react';
 
+const WHATSAPP_GROUPS = {
+  male: 'https://chat.whatsapp.com/D5tbrLnAkCl2scAyrg21NS?s=cl&p=i&ilr=4&iam=2',
+  female: 'https://chat.whatsapp.com/CJ5UeWWAeIkFQaLOKpw7Pl?s=cl&p=i&ilr=4&iam=2',
+} as const;
+
 export default function LandingPage() {
   const [menuOpen, setMenuOpen] = useState(false);
   const scrollProgressRef = useRef<HTMLDivElement>(null);
@@ -198,11 +203,11 @@ export default function LandingPage() {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const name = String(data.get('name') || '').trim();
-    const phone = String(data.get('phone') || '').trim();
-    const email = String(data.get('email') || '').trim();
-    const message = `আসসালামু আলাইকুম, আমি SukunLife-এর ৪০ দিনের চ্যালেঞ্জে রেজিস্ট্রেশন করতে চাই।\n\nনাম: ${name}\nহোয়াটসঅ্যাপ নাম্বার: ${phone}\nজিমেইল: ${email}\nরেজিস্ট্রেশন: সম্পূর্ণ ফ্রি\n\nপরবর্তী ধাপটি জানাবেন।`;
-    window.open(`https://wa.me/8801887753555?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
+    const gender = String(data.get('gender') || '');
+
+    if (gender !== 'male' && gender !== 'female') return;
+
+    window.location.assign(WHATSAPP_GROUPS[gender]);
   };
 
   return (
@@ -388,7 +393,7 @@ export default function LandingPage() {
           <p className="price-note">কোনো ফি লাগবে না। পুরো আয়োজনটি সম্পূর্ণ ফ্রি।</p>
           <span className="consult-value">৪০ দিনের প্ল্যান ও প্রয়োজনীয় উপকরণ</span>
           <a className="btn btn-primary btn-wide" href="#register">ফ্রি রেজিস্ট্রেশন করুন</a>
-          <div className="secure">রেজিস্ট্রেশন শেষে পরবর্তী নির্দেশনা WhatsApp-এ জানানো হবে।</div>
+          <div className="secure">রেজিস্ট্রেশন শেষে আপনার নির্বাচিত WhatsApp গ্রুপে নিয়ে যাওয়া হবে।</div>
         </aside>
       </div>
     </section>
@@ -397,8 +402,8 @@ export default function LandingPage() {
       <div className="container">
         <div className="section-head reveal">
           <span className="eyebrow"><span className="dot"></span>রেজিস্ট্রেশন</span>
-          <h2>রেজিস্ট্রেশন করতে এই ৩টি তথ্য দিন</h2>
-          <p className="lead" style={{ marginInline: 'auto' }}>নাম, WhatsApp নম্বর আর Gmail ঠিকানা লিখে সাবমিট করুন। এরপর WhatsApp খুলবে। মেসেজটি পাঠিয়ে দিলেই পরবর্তী ধাপ জানানো হবে।</p>
+          <h2>রেজিস্ট্রেশন করতে এই ৪টি তথ্য দিন</h2>
+          <p className="lead" style={{ marginInline: 'auto' }}>নাম, WhatsApp নম্বর, Gmail ঠিকানা এবং পুরুষ বা মহিলা নির্বাচন করুন। সাবমিট করলেই আপনার জন্য নির্ধারিত WhatsApp গ্রুপ খুলবে।</p>
         </div>
         <div className="form-shell reveal">
           <aside className="form-info">
@@ -411,8 +416,21 @@ export default function LandingPage() {
             <div className="field"><label htmlFor="name">নাম</label><input id="name" name="name" required placeholder="আপনার নাম" autoComplete="name" /></div>
             <div className="field"><label htmlFor="phone">হোয়াটসঅ্যাপ নাম্বার</label><input id="phone" name="phone" required inputMode="tel" placeholder="01XXXXXXXXX" autoComplete="tel" /></div>
             <div className="field"><label htmlFor="email">জিমেইল</label><input id="email" name="email" type="email" required placeholder="example@gmail.com" autoComplete="email" /></div>
-            <button className="btn btn-primary btn-wide" type="submit">WhatsApp-এ তথ্য পাঠান</button>
-            <p className="form-note">সাবমিট করলে WhatsApp খুলবে। এই ওয়েবসাইটে আপনার তথ্য সেভ হবে না।</p>
+            <fieldset className="field gender-field">
+              <legend>আপনি কোন গ্রুপে যোগ দিতে চান?</legend>
+              <div className="gender-options">
+                <label className="gender-option">
+                  <input type="radio" name="gender" value="male" required />
+                  <span>পুরুষ</span>
+                </label>
+                <label className="gender-option">
+                  <input type="radio" name="gender" value="female" required />
+                  <span>মহিলা</span>
+                </label>
+              </div>
+            </fieldset>
+            <button className="btn btn-primary btn-wide" type="submit">রেজিস্ট্রেশন করে গ্রুপে যোগ দিন</button>
+            <p className="form-note">সাবমিট করলে আপনার নির্বাচিত WhatsApp গ্রুপ খুলবে। এই ওয়েবসাইটে আপনার তথ্য সেভ হবে না।</p>
           </form>
         </div>
       </div>
