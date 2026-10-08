@@ -207,7 +207,29 @@ export default function LandingPage() {
 
     if (gender !== 'male' && gender !== 'female') return;
 
-    window.location.assign(WHATSAPP_GROUPS[gender]);
+    const destination = WHATSAPP_GROUPS[gender];
+    let redirected = false;
+
+    const goToGroup = () => {
+      if (redirected) return;
+      redirected = true;
+      window.location.assign(destination);
+    };
+
+    const trackingWindow = window as typeof window & {
+      dataLayer?: Array<Record<string, unknown>>;
+    };
+
+    trackingWindow.dataLayer = trackingWindow.dataLayer || [];
+    trackingWindow.dataLayer.push({
+      event: 'challenge_registration_submit',
+      registration_gender: gender,
+      registration_destination: 'whatsapp_group',
+      eventCallback: goToGroup,
+      eventTimeout: 800,
+    });
+
+    window.setTimeout(goToGroup, 900);
   };
 
   return (
