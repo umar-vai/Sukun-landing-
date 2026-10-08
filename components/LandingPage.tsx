@@ -218,12 +218,17 @@ export default function LandingPage() {
 
     const trackingWindow = window as typeof window & {
       dataLayer?: Array<Record<string, unknown>>;
+      fbq?: (...args: unknown[]) => void;
     };
+
+    trackingWindow.fbq?.('track', 'CompleteRegistration', {
+      content_name: 'SukunLife 40 Day Challenge',
+      content_category: 'Ruqyah Challenge Registration',
+    });
 
     trackingWindow.dataLayer = trackingWindow.dataLayer || [];
     trackingWindow.dataLayer.push({
       event: 'challenge_registration_submit',
-      registration_gender: gender,
       registration_destination: 'whatsapp_group',
       eventCallback: goToGroup,
       eventTimeout: 800,
