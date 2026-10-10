@@ -227,7 +227,7 @@ export default function LandingPage() {
       phone,
       email,
       gender,
-      group: gender === 'male' ? 'Male WhatsApp Group' : 'Female WhatsApp Group',
+      group: `${gender === 'male' ? 'Male WhatsApp Group' : 'Female WhatsApp Group'} | ${destination}`,
       utm_source: params.get('utm_source') || '',
       utm_campaign: params.get('utm_campaign') || '',
       utm_adset: params.get('utm_adset') || params.get('utm_ad_set') || '',
