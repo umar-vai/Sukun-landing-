@@ -7,8 +7,12 @@ const WHATSAPP_GROUPS = {
   female: 'https://chat.whatsapp.com/CJ5UeWWAeIkFQaLOKpw7Pl?s=cl&p=i&ilr=4&iam=2',
 } as const;
 
+const REGISTRATION_ENDPOINT =
+  'https://script.google.com/macros/s/AKfycbxSkjiFCpsSi8z5n76u6bkuuDg9ky3GK447Wq0-QMIYepQqqQnYVcXujr6ZGhZaM92j/exec';
+
 export default function LandingPage() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const scrollProgressRef = useRef<HTMLDivElement>(null);
 
   const closeMenu = useCallback(() => setMenuOpen(false), []);
@@ -200,14 +204,53 @@ export default function LandingPage() {
     return () => cleanups.reverse().forEach((cleanup) => cleanup());
   }, []);
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (submitting) return;
+
     const data = new FormData(event.currentTarget);
+    const name = String(data.get('name') || '').trim();
+    const phone = String(data.get('phone') || '').trim();
+    const email = String(data.get('email') || '').trim();
     const gender = String(data.get('gender') || '');
 
+    if (!name || !phone || !email) return;
     if (gender !== 'male' && gender !== 'female') return;
 
+    setSubmitting(true);
+
     const destination = WHATSAPP_GROUPS[gender];
+    const params = new URLSearchParams(window.location.search);
+
+    const payload = {
+      name,
+      phone,
+      email,
+      gender,
+      group: gender === 'male' ? 'Male WhatsApp Group' : 'Female WhatsApp Group',
+      utm_source: params.get('utm_source') || '',
+      utm_campaign: params.get('utm_campaign') || '',
+      utm_adset: params.get('utm_adset') || params.get('utm_ad_set') || '',
+      utm_content: params.get('utm_content') || params.get('utm_ad') || '',
+    };
+
+    try {
+      await Promise.race([
+        fetch(REGISTRATION_ENDPOINT, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'text/plain;charset=utf-8',
+          },
+          body: JSON.stringify(payload),
+          keepalive: true,
+        }),
+        new Promise((resolve) => window.setTimeout(resolve, 1800)),
+      ]);
+    } catch {
+      // Continue to WhatsApp even if the logging request is interrupted.
+    }
+
     let redirected = false;
 
     const goToGroup = () => {
@@ -445,8 +488,10 @@ export default function LandingPage() {
                 <option value="female">মহিলা</option>
               </select>
             </div>
-            <button className="btn btn-primary btn-wide" type="submit">রেজিস্ট্রেশন করে গ্রুপে যোগ দিন</button>
-            <p className="form-note">সাবমিট করলে আপনার নির্বাচিত WhatsApp গ্রুপ খুলবে। এই ওয়েবসাইটে আপনার তথ্য সেভ হবে না।</p>
+            <button className="btn btn-primary btn-wide" type="submit" disabled={submitting}>
+              {submitting ? 'রেজিস্ট্রেশন হচ্ছে...' : 'রেজিস্ট্রেশন করে গ্রুপে যোগ দিন'}
+            </button>
+            <p className="form-note">সাবমিট করলে আপনার রেজিস্ট্রেশন তথ্য সংরক্ষণ হবে, তারপর নির্বাচিত WhatsApp গ্রুপ খুলবে।</p>
           </form>
         </div>
       </div>
