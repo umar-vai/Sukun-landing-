@@ -3,7 +3,7 @@
 import { FormEvent, useCallback, useEffect, useRef, useState } from 'react';
 
 const WHATSAPP_GROUPS = {
-  male: 'https://chat.whatsapp.com/D5tbrLnAkCl2scAyrg21NS?s=cl&p=i&ilr=4&iam=2',
+  male: 'https://chat.whatsapp.com/JFYTzy2XJD51UPWP09IWih?s=cl&p=i&ilr=4&iam=2',
   female: 'https://chat.whatsapp.com/IG3zfJsT2wWA8eq8CENKfY?s=cl&p=i&ilr=4&iam=2',
 } as const;
 
