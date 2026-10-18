@@ -4,7 +4,7 @@ import { FormEvent, useCallback, useEffect, useRef, useState } from 'react';
 
 const WHATSAPP_GROUPS = {
   male: 'https://chat.whatsapp.com/JFYTzy2XJD51UPWP09IWih?s=cl&p=i&ilr=4&iam=2',
-  female: 'https://chat.whatsapp.com/HeNYVtXwoRa7DEezhifUCV?s=cl&p=i&ilr=4&iam=2',
+  female: 'https://chat.whatsapp.com/GG8KRWaOo7w5E8Fm6hTKmL?s=cl&p=i&mlu=4&ilr=4&iam=2',
 } as const;
 
 const REGISTRATION_ENDPOINT =
