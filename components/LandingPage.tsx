@@ -10,6 +10,31 @@ const WHATSAPP_GROUPS = {
 const REGISTRATION_ENDPOINT =
   'https://script.google.com/macros/s/AKfycbxSkjiFCpsSi8z5n76u6bkuuDg9ky3GK447Wq0-QMIYepQqqQnYVcXujr6ZGhZaM92j/exec';
 
+const DUPLICATE_STORAGE_PREFIX = 'sukunlife-registration-v1:';
+
+function normalizePhone(value: string) {
+  let digits = value.replace(/\D/g, '');
+  if (digits.startsWith('880') && digits.length >= 13) {
+    digits = `0${digits.slice(3)}`;
+  }
+  return digits;
+}
+
+async function registrationStorageKey(type: 'phone' | 'email', value: string) {
+  const normalized = type === 'email' ? value.trim().toLowerCase() : normalizePhone(value);
+
+  try {
+    const encoded = new TextEncoder().encode(`${type}:${normalized}`);
+    const digest = await window.crypto.subtle.digest('SHA-256', encoded);
+    const hash = Array.from(new Uint8Array(digest))
+      .map((byte) => byte.toString(16).padStart(2, '0'))
+      .join('');
+    return `${DUPLICATE_STORAGE_PREFIX}${hash}`;
+  } catch {
+    return `${DUPLICATE_STORAGE_PREFIX}${type}:${encodeURIComponent(normalized)}`;
+  }
+}
+
 export default function LandingPage() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -217,9 +242,26 @@ export default function LandingPage() {
     if (!name || !phone || !email) return;
     if (gender !== 'male' && gender !== 'female') return;
 
+    const destination = WHATSAPP_GROUPS[gender];
+    const [phoneStorageKey, emailStorageKey] = await Promise.all([
+      registrationStorageKey('phone', phone),
+      registrationStorageKey('email', email),
+    ]);
+
+    const previousGroup =
+      window.localStorage.getItem(phoneStorageKey) ||
+      window.localStorage.getItem(emailStorageKey);
+
+    if (previousGroup) {
+      window.alert('এই WhatsApp নম্বর বা ইমেইল দিয়ে আগেই রেজিস্ট্রেশন করা হয়েছে। নতুন করে আরেকটি রেজিস্ট্রেশন তৈরি হয়নি।');
+      if (previousGroup.startsWith('https://chat.whatsapp.com/')) {
+        window.location.assign(previousGroup);
+      }
+      return;
+    }
+
     setSubmitting(true);
 
-    const destination = WHATSAPP_GROUPS[gender];
     const params = new URLSearchParams(window.location.search);
 
     const payload = {
@@ -250,6 +292,9 @@ export default function LandingPage() {
     } catch {
       // Continue to WhatsApp even if the logging request is interrupted.
     }
+
+    window.localStorage.setItem(phoneStorageKey, destination);
+    window.localStorage.setItem(emailStorageKey, destination);
 
     let redirected = false;
 
@@ -491,7 +536,7 @@ export default function LandingPage() {
             <button className="btn btn-primary btn-wide" type="submit" disabled={submitting}>
               {submitting ? 'রেজিস্ট্রেশন হচ্ছে...' : 'রেজিস্ট্রেশন করে গ্রুপে যোগ দিন'}
             </button>
-            <p className="form-note">সাবমিট করলে আপনার রেজিস্ট্রেশন তথ্য সংরক্ষণ হবে, তারপর নির্বাচিত WhatsApp গ্রুপ খুলবে।</p>
+            <p className="form-note">সাবমিট করলে আপনার রেজিস্ট্রেশন তথ্য সংরক্ষণ হবে, তারপর নির্বাচিত WhatsApp গ্রুপ খুলবে। একই WhatsApp নম্বর বা ইমেইল দিয়ে একই ডিভাইস থেকে একাধিক রেজিস্ট্রেশন তৈরি হবে না।</p>
           </form>
         </div>
       </div>
